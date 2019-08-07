@@ -56,7 +56,11 @@ RCT_EXPORT_MODULE()
                            @"x": [NSNumber numberWithFloat:location.x],
                            @"y": [NSNumber numberWithFloat:location.y],
                            };
-    [self.bridge enqueueJSCall:@"RCTEventEmitter" method:@"receiveEvent" args:@[dict[@"target"], RCTNormalizeInputEventName(@"topChange"), dict] completion:NULL];
+    // Temporary fix until release 0.5.1 is fixed
+    // https://github.com/xinthink/react-native-material-kit/issues/414
+    // [self.bridge.eventDispatcher sendInputEventWithName:@"topChange" body:dict];
+    
+    [self.bridge enqueueJSCall:@"RCTEventEmitter" method:@"receiveEvent" args:@[dict[@"target"], RCTNormalizeInputEventName(@"topChange"), dict] completion:NULL];    
 }
 
 @end
